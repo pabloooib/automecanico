@@ -1,1 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simulador de carro mecánico</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;700&family=Saira:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>Simulador de carro mecánico</h1>
+    <div class="topbar-actions">
+      <span id="engineState" class="chip" data-state="off">Motor apagado</span>
+      <button id="muteBtn" class="btn" type="button" aria-pressed="false">Sonido: sí</button>
+    </div>
+  </header>
 
+  <main>
+    <section class="dash" aria-label="Panel de instrumentos">
+      <figure class="gauge tach">
+        <svg viewBox="0 0 200 200" role="img" aria-label="Tacómetro">
+          <circle cx="100" cy="100" r="96" class="face"/>
+          <g id="tachDial"></g>
+          <g id="tachNeedle" class="needle"><line y1="14" y2="-74"/><circle r="6"/></g>
+        </svg>
+        <figcaption><output id="rpmOut">0</output> <span>rpm</span></figcaption>
+      </figure>
+
+      <div class="center">
+        <output id="gearOut" class="gear" aria-label="Marcha actual">N</output>
+        <div id="shiftLight" class="shift-light" aria-hidden="true">Sube de marcha</div>
+        <p id="hint" class="hint" role="status" aria-live="polite">Presiona E para arrancar el motor.</p>
+      </div>
+
+      <figure class="gauge speed">
+        <svg viewBox="0 0 200 200" role="img" aria-label="Velocímetro">
+          <circle cx="100" cy="100" r="96" class="face"/>
+          <g id="speedDial"></g>
+          <g id="speedNeedle" class="needle"><line y1="14" y2="-74"/><circle r="6"/></g>
+        </svg>
+        <figcaption><output id="speedOut">0</output> <span>km/h</span></figcaption>
+      </figure>
+    </section>
+
+    <section class="controls" aria-label="Controles">
+      <div class="pedals" role="group" aria-label="Pedales">
+        <button class="pedal clutch" type="button" data-pedal="clutch">
+          <span class="fill"></span><span class="pedal-label">Embrague <kbd>Espacio</kbd></span>
+        </button>
+        <button class="pedal brake" type="button" data-pedal="brake">
+          <span class="fill"></span><span class="pedal-label">Freno <kbd>↓</kbd></span>
+        </button>
+        <button class="pedal throttle" type="button" data-pedal="throttle">
+          <span class="fill"></span><span class="pedal-label">Acelerador <kbd>↑</kbd></span>
+        </button>
+      </div>
+
+      <div class="gearbox" role="group" aria-label="Caja de cambios">
+        <button class="gear-btn" type="button" data-gear="1">1</button>
+        <button class="gear-btn" type="button" data-gear="3">3</button>
+        <button class="gear-btn" type="button" data-gear="5">5</button>
+        <button class="gear-btn neutral" type="button" data-gear="0">N</button>
+        <button class="gear-btn" type="button" data-gear="2">2</button>
+        <button class="gear-btn" type="button" data-gear="4">4</button>
+        <button class="gear-btn" type="button" data-gear="-1">R</button>
+      </div>
+
+      <div class="ignition">
+        <button id="ignitionBtn" class="btn start" type="button">Encender / apagar <kbd>E</kbd></button>
+        <p class="help">Marchas: <kbd>1</kbd>–<kbd>5</kbd>, <kbd>N</kbd> neutral, <kbd>R</kbd> reversa. Pisa el embrague para cambiar y suéltalo despacio mientras aceleras.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
